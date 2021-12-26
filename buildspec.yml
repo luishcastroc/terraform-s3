@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+
+  install:
+    runtime-versions:
+      nodejs: 12
+  pre_build:    
+    commands: 
+      - npm install
+  build:
+    commands:
+      - ls
+      - npm run build
+      - ls 
+      - cd ${folder}
+      - ls
+      - pwd
+      - aws s3 sync ./ s3://${s3bucket}/ --cache-control 360000 --expires "2022-06-14T00:00:00Z" --delete
+      - aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id ${cfid} --paths "/*"
