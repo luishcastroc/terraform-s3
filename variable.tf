@@ -1,11 +1,16 @@
-variable app_name {}
+variable app_name {
+  type = string
+  default = "universe-simplification"
+}
 
-variable aws_region {}
+variable aws_region {
+  default = "us-east-1"
+}
 
 
 variable env_type {
     type = string
-    default = "prod"
+    default = "dev"
 }
 
 variable "codestarconnections_name" {
@@ -15,10 +20,18 @@ variable "codestarconnections_name" {
 
 variable "env_vars" {default = {}} 
 
-variable frontend {}
+variable frontend {
+  default = "angular"
+}
 
-variable "reponame" {}
+variable "reponame" {
+  default = "luishcastroc/solucrea-nx"
+}
 
-variable "repo_branch" {}
+variable "repo_branch" {
+  default = "main"
+}
 
-variable folder {}
+variable folder {
+  default = "frontend"
+}

@@ -1,11 +1,15 @@
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket = "codepipeline-${var.aws_region}-${var.app_name}-${var.env_type}-${var.frontend}"
+  bucket = "codepipeline-${var.aws_region}-${var.app_name}-${var.env_type}-${var.frontend}"  
+}
+
+resource "aws_s3_bucket_acl" "codepipeline_bucket_acl" {
+  bucket = aws_s3_bucket.codepipeline_bucket.bucket
   acl    = "private"
 }
 
-resource "aws_codestarconnections_connection" "example" {
+resource "aws_codestarconnections_connection" "simplification" {
   name          = var.codestarconnections_name
-  provider_type = "Bitbucket"
+  provider_type = "GitHub"
 }
 
 resource "aws_codepipeline" "codepipeline" {
@@ -29,7 +33,7 @@ resource "aws_codepipeline" "codepipeline" {
       output_artifacts = ["source_output"]
 
       configuration = {
-        ConnectionArn    = aws_codestarconnections_connection.example.arn
+        ConnectionArn    = aws_codestarconnections_connection.simplification.arn
         FullRepositoryId = var.reponame
         BranchName       = var.repo_branch
         OutputArtifactFormat = "CODE_ZIP"

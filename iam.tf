@@ -1,5 +1,5 @@
 resource "aws_iam_role" "codepipeline_role" {
-  name = "codepipeline-${var.app_name}-${var.frontend}-access"
+  name = "codepipeline-universe-angular-access"
 
   assume_role_policy = <<EOF
 {
@@ -18,7 +18,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "codepipeline_policy" {
-  name = "codepipeline_${var.app_name}-${var.frontend}_policy"
+  name = "codepipeline_universe-angular_policy"
   role = aws_iam_role.codepipeline_role.id
 
   policy = <<EOF
@@ -123,7 +123,7 @@ EOF
 }
 
 resource "aws_iam_role" "codebuild_role" {
-  name = "codebuild-${var.app_name}-${var.frontend}-access"
+  name = "codebuild-universe-angular-access"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
